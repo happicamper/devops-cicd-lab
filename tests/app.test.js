@@ -1,5 +1,5 @@
 const { getStatus } = require("../app");
 
 test("application should return Operational", () => {
-    expect(getStatus()).toBe("Broken");
+    expect(getStatus()).toBe("Operational");
 });
