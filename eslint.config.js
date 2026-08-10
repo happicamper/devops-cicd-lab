@@ -9,7 +9,9 @@ module.exports = [
             sourceType: "commonjs",
             globals: {
                 require: "readonly",
-                module: "readonly"
+                module: "readonly",
+                console: "readonly"
+
             }
         }
     },
