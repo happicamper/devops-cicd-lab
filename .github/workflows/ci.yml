@@ -33,9 +33,6 @@ jobs:
         run: npm test
 
       - name: Build
-<<<<<<< Updated upstream
-        run: npm run build
-=======
         run: npm run build
 
       - name: Upload build artifact
@@ -86,4 +83,3 @@ jobs:
 
       - name: Deploy to s3
         run: aws s3 sync dist/ s3://gilroy-devops-cicd-lab
->>>>>>> Stashed changes
