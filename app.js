@@ -1,5 +1,5 @@
 function getStatus() {
-    return "Operational";
+    return "Operational - v1.1";
 }
 
 module.exports = { getStatus };
