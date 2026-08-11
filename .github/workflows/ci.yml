@@ -46,13 +46,19 @@ jobs:
           path: dist/
 
 
-  deploy:
+  deploy-dev:
 
     needs: test
 
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     runs-on: ubuntu-latest
+
+    env:
+      DEV_BUCKET: gilroy-devops-cicd-dev
+      PROD_BUCKET: gilroy-devops-cicd-prod
+      AWS_ROLE_ARN: arn:aws:iam::461194020292:role/devops-cicd-s3
+      AWS_REGION: ap-southeast-1
 
     steps:
 
@@ -65,11 +71,11 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v5
         with:
-            role-to-assume: arn:aws:iam::461194020292:role/devops-cicd-s3
-            aws-region: ap-southeast-1
+            role-to-assume: $AWS_ROLE_ARN
+            aws-region: $AWS_REGION
 
       - name: Test AWS S3 Access
         run: aws sts get-caller-identity
 
       - name: Deploy to s3
-        run: aws s3 sync dist/ s3://gilroy-devops-cicd-lab
+        run: aws s3 sync dist/ s3://$DEV_BUCKET/
